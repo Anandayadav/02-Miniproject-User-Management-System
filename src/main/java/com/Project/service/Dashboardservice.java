@@ -13,7 +13,7 @@ public class Dashboardservice {
 	
 	private static final String Quote_endpoint="https://type.fit/api/quotes";
 	
-	public static Map<String, String> getQuote()
+	public  Map<String, String> getQuote()
 	{
 		RestTemplate rt=new RestTemplate();
 	

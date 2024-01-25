@@ -8,7 +8,7 @@ import com.Project.binding.Resetpswrdform;
 
 public interface Userservice {
 
-	public Optional<User>  findUser(Integer uid);
+	public User findUser(String email);
 	
 	public boolean saveUser(Registerform rgform);
 	
@@ -16,7 +16,6 @@ public interface Userservice {
 	
 	public boolean resetpassword(Resetpswrdform resetform);
 	
-	public String dashboard();
-	
+	public boolean sendEmailMessage(String to,String subject,String body);
 	
 }

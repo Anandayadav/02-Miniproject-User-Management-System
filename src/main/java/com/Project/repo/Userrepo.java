@@ -8,6 +8,7 @@ import com.Project.Entity.User;
 @Repository
 public interface Userrepo extends JpaRepository<User, Integer> {
 	
+	public User findByEmail(String email);
 	
 	public User findByEmailAndPassword(String email,String password);
 	
