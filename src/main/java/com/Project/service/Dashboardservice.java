@@ -1,33 +1,46 @@
 package com.Project.service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.Project.binding.Quote;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Service
 public class Dashboardservice {
 
+	private  String quoteurl="https://type.fit/api/quotes";
+	private Quote[] quotes = null;
+
 	
-	
-	private static final String Quote_endpoint="https://type.fit/api/quotes";
-	
-	public  Map<String, String> getQuote()
+	public  String getQuote()
 	{
+		if(quotes==null)
+		{
 		RestTemplate rt=new RestTemplate();
 	
 		
-		ResponseEntity<Map[]>responseentity=rt.getForEntity(Quote_endpoint, Map[].class);
+		ResponseEntity<String>forentity=rt.getForEntity(quoteurl, String.class);
 		
-		Map<String,String>[]quotesmaparry=responseentity.getBody();
+		String body=forentity.getBody();
 		
+		ObjectMapper mapper=new ObjectMapper();
+		try {
+			quotes=mapper.readValue(body, Quote[].class);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 		Random random=new Random();	
-		Integer randomnum=random.nextInt(quotesmaparry.length);
+		int randomnum=random.nextInt(quotes.length-1);
+	
 		
-		Map<String,String>selectquote=quotesmaparry[randomnum];
-		
-		return selectquote;
+		return quotes[randomnum].getText();
 		
 	}
 

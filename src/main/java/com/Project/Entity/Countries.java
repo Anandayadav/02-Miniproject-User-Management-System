@@ -10,9 +10,19 @@ import jakarta.persistence.Id;
 public class Countries {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer crid;
 	private String countries;
+	
+	
+	
+	public Countries() {
+		
+	}
+	public Countries(Integer crid, String countries) {
+		super();
+		this.crid = crid;
+		this.countries = countries;
+	}
 	public Integer getCrid() {
 		return crid;
 	}

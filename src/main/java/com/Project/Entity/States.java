@@ -9,10 +9,22 @@ import jakarta.persistence.Id;
 public class States {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer sid;
 	private String states;
 	private Integer crid;
+	
+	
+	public States() {
+		super();
+	}
+	
+	public States(Integer sid, String states, Integer crid) {
+		super();
+		this.sid = sid;
+		this.states = states;
+		this.crid = crid;
+	}
+
 	public Integer getSid() {
 		return sid;
 	}

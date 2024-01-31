@@ -6,9 +6,9 @@ public class Registerform {
 	private String name;
 	private String email;
 	private long phno;
-	private String country;
-	private String state;
-	private String city;
+	private Integer crid;
+	private Integer sid;
+	private Integer cid;
 	public Integer getUid() {
 		return uid;
 	}
@@ -33,25 +33,24 @@ public class Registerform {
 	public void setPhno(long phno) {
 		this.phno = phno;
 	}
-	public String getCountry() {
-		return country;
+	public Integer getCrid() {
+		return crid;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setCrid(Integer crid) {
+		this.crid = crid;
 	}
-	public String getState() {
-		return state;
+	public Integer getSid() {
+		return sid;
 	}
-	public void setState(String state) {
-		this.state = state;
+	public void setSid(Integer sid) {
+		this.sid = sid;
 	}
-	public String getCity() {
-		return city;
+	public Integer getCid() {
+		return cid;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setCid(Integer cid) {
+		this.cid = cid;
 	}
-	
 	
 	
 }

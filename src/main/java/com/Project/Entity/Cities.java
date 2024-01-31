@@ -8,11 +8,22 @@ import jakarta.persistence.Id;
 @Entity
 public class Cities {
 	
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	private Integer cid;
 	private String cities;
 	private Integer sid;
+	
+	
+	
+	public Cities() {
+		super();
+	}
+	public Cities(Integer cid, String cities, Integer sid) {
+		super();
+		this.cid = cid;
+		this.cities = cities;
+		this.sid = sid;
+	}
 	public Integer getCid() {
 		return cid;
 	}
