@@ -21,7 +21,7 @@
 		</font>
 		
 
-		<form action="register" method="post" th:object="${registerform}">
+		<form action="/register" th:object="${registerform}" method="post" >
 			<table>
 				<tr>
 					<td>Name:</td>
@@ -32,9 +32,14 @@
 					<td><input type="email" th:field="*{email}" required /></td>
 				</tr>
 				<tr>
+					<td>Phone Number:</td>
+					<td><input type="text" th:field="*{phno}" required /></td>
+				</tr>
+				<tr>
 					<td>Country:</td>
 					<td>
-						<select th:field="*{crid}" id="crid" class="form-select" required>
+						
+						<select  th:field="*{crid}" class="form-select" required>
 							<option value="">-Select-</option>
 							<option th:each="entry : ${countries.entrySet()}" th:value="${entry.key}"
 								th:text="${entry.value}">
@@ -44,7 +49,7 @@
 				<tr>
 					<td>State:</td>
 					<td>
-						<select th:field="*{sid}" id="sid" class="form-select" required>
+						<select th:field="*{sid}" class="form-select" required>
 							<option value="">-Select-</option>
 						</select>
 					</td>
@@ -52,7 +57,7 @@
 				<tr>
 					<td>City:</td>
 					<td>
-						<select th:field="*{cid}" id="cid" class="form-select" required>
+						<select th:field="*{cid}"  class="form-select" required>
 							<option value="">-Select-</option>
 						</select>
 					</td>
@@ -64,7 +69,7 @@
 			</table>
 		</form>
 
-		Do You Have Account ? <a href="/">Sign-In Here</a>
+		Do You Have Account ? <a href="/registerPage">Sign-In Here</a>
 
 	</div>
 

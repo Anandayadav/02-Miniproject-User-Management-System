@@ -32,8 +32,6 @@ public class Usercontroller {
 	private Dashboardservice dashservice;
 	
 
-	
-	
 	@GetMapping("/")
 	public String loginPage(Model model)
 	{
@@ -121,7 +119,7 @@ public class Usercontroller {
 	}
 	
 	@PostMapping("/reset-password")
-	public String  resetPassword( Resetpswrdform resetform,Model model)
+	public String  resetPassword(Resetpswrdform resetform,Model model)
 	{
 		model.addAttribute("resetpswrdform", new Resetpswrdform());
 		
@@ -168,5 +166,3 @@ public class Usercontroller {
 	}
 	
 }
-
-
