@@ -1,0 +1,35 @@
+server:
+  port: 9090
+spring:
+  datasource:
+    password: Anandak@97
+    url: jdbc:mysql://localhost:3306/anandadb
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    password: akch fxrz penk qozh
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    username: anandakyadav97@gmail.com
+
+
+app:
+ messages:
+  invalidlogin: Invalid Credentials
+  dupilcateemail: Change the EmailId
+  resetpasswordfailure: Newpassword and confirmpassword must be same.
+  
+
+

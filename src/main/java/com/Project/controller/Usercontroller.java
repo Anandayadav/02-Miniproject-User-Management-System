@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.Project.Entity.Cities;
 import com.Project.Entity.User;
 import com.Project.binding.Loginform;
 import com.Project.binding.Registerform;
 import com.Project.binding.Resetpswrdform;
-import com.Project.repo.Citiesrepo;
+import com.Project.props.AppProps;
 import com.Project.service.Dashboardservice;
 import com.Project.service.Userservice;
 
@@ -31,7 +31,11 @@ public class Usercontroller {
 	@Autowired
 	private Dashboardservice dashservice;
 	
+	@Autowired
+	private AppProps props;
+	
 
+	
 	@GetMapping("/")
 	public String loginPage(Model model)
 	{
@@ -44,9 +48,10 @@ public class Usercontroller {
 	{
 		model.addAttribute("registerform", new Registerform());
 		
-		Map<Integer,String>countries=uservice.retrievecountries();
 		
+		Map<Integer,String>countries=uservice.retrievecountries();
 		model.addAttribute("countries", countries);
+		
 		return "register";
 	}
 	
@@ -79,7 +84,11 @@ public class Usercontroller {
 		
 		if(user!=null)
 		{
-			model.addAttribute("errMsg", "Please change EmailId.....");
+
+			Map<Integer,String>countries=uservice.retrievecountries();
+			model.addAttribute("countries", countries);
+			Map<String,String>msgs=props.getMessages();
+			model.addAttribute("errMsg", msgs.get("dupilcateemail"));
 			return "register";
 		}
 		boolean status=uservice.saveUser(rgform);
@@ -97,6 +106,7 @@ public class Usercontroller {
 	{
 		model.addAttribute("loginform", new Loginform());
 		
+		Map<String,String>msg=props.getMessages();
 		HttpSession session=req.getSession(true);
 	
 			User user=uservice.login(login);
@@ -114,7 +124,9 @@ public class Usercontroller {
 					return "redirect:dashboard";
 				}
 			}
-			model.addAttribute("errMsg", "Invalid Login Credentials...");
+			
+			Map<String,String> msgs=props.getMessages();
+			model.addAttribute("errMsg", msgs.get("invalidlogin"));
 		return "login";
 	}
 	
@@ -127,13 +139,17 @@ public class Usercontroller {
 		BeanUtils.copyProperties(resetform, resetpswrdform);
 		resetpswrdform.setEmail(resetform.getEmail());
 
-		
+		if(resetpswrdform.getNewpassword()==resetpswrdform.getConfirmpassword())
+		{
 			boolean status=uservice.resetpassword(resetpswrdform);
+		
 			if(status)
 			{
 				return "redirect:dashboard";
 			}
-			model.addAttribute("errMsg", "newpassword and confirmpassword must be same...");
+		}
+			Map<String,String>msgs=props.getMessages();
+			model.addAttribute("errMsg", msgs.get("resetpasswordfailure"));
 		return "resetpassword";
 		
 	}
