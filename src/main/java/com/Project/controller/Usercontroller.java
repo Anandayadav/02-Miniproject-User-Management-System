@@ -84,7 +84,6 @@ public class Usercontroller {
 		
 		if(user!=null)
 		{
-
 			Map<Integer,String>countries=uservice.retrievecountries();
 			model.addAttribute("countries", countries);
 			Map<String,String>msgs=props.getMessages();
